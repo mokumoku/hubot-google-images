@@ -40,7 +40,7 @@ module.exports = (robot) ->
 
   robot.respond /(corgi|kogi|コーギー)( me)?/i, (msg) ->
     corgi = msg.random corgis
-    imageMe msg, corgi, true, (url) ->
+    imageMe msg, corgi, (url) ->
       msg.send url
 
 imageMe = (msg, query, animated, faces, cb) ->
