@@ -38,10 +38,10 @@ module.exports = (robot) ->
         encodedUrl = encodeURIComponent url
         msg.send "#{mustachify}#{encodedUrl}"
 
-    robot.respond /(corgi|kogi)( me)?/i, (msg) ->
-        corgi = msg.random corgis
-        imageMe msg, corgi, true, (url) ->
-            msg.send url
+  robot.respond /(corgi|kogi|コーギー)( me)?/i, (msg) ->
+    corgi = msg.random corgis
+    imageMe msg, corgi, true, (url) ->
+      msg.send url
 
 imageMe = (msg, query, animated, faces, cb) ->
   cb = animated if typeof animated == 'function'
