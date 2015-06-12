@@ -7,10 +7,14 @@
 #   HUBOT_MUSTACHIFY_URL - Optional. Allow you to use your own mustachify instance.
 #
 # Commands:
-#   hubot image me <query> - The Original. Queries Google Images for <query> and returns a random top result.
-#   hubot animate me <query> - The same thing as `image me`, except adds a few parameters to try to return an animated GIF instead.
-#   hubot mustache me <url> - Adds a mustache to the specified URL.
-#   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
+#   image me <query> - 画像検索
+#   animate me <query> - gifアニメ検索
+#   corgi - コーギー
+
+corgis = [
+    "コーギー",
+    "corgi"
+]
 
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->
@@ -33,6 +37,11 @@ module.exports = (robot) ->
       imageMe msg, imagery, false, true, (url) ->
         encodedUrl = encodeURIComponent url
         msg.send "#{mustachify}#{encodedUrl}"
+
+    robot.respond /(corgi|kogi)( me)?/i, (msg) ->
+        corgi = msg.random corgis
+        imageMe msg, corgi, true, (url) ->
+            msg.send url
 
 imageMe = (msg, query, animated, faces, cb) ->
   cb = animated if typeof animated == 'function'
